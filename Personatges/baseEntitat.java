@@ -1,18 +1,15 @@
 package Personatges;
 
 public abstract class baseEntitat {
-    protected String nom;
-    protected int nivell;
-    protected int puntsVida;
-    protected int defensa;
-
+    private String nom;
+    private int nivell;
+    private int puntsVida;
 
     //constructor
-    public baseEntitat(String nom, int nivell, int puntsVida, int defensa) {
+    public baseEntitat(String nom, int nivell, int puntsVida) {
         this.nom = nom;
         this.nivell = nivell;
         this.puntsVida = puntsVida;
-        this.defensa = defensa;
     }
 
     public String getNom() {
@@ -36,25 +33,16 @@ public abstract class baseEntitat {
     }
 
     public void setPuntsVida(int v) {
+        if (v < 0) v = 0; //Si algú intenta posar la vida a un valor negatiu, el setter ho corregeix automàticament i ho converteix en 0
         this.puntsVida = v;
     }
-    public int atacar(){
-        int ataque 
+    
+    public abstract void atacar();
+
+    public void rebreDany(int quantitat) {
+        int danyFinal = Math.max(0, quantitat); 
+        setPuntsVida(getPuntsVida()- danyFinal);
     }
-
-    public boolean rebreDany(int quantitat) {
-        int danyFinal = quantitat - defensa;
-        if (danyFinal < 0) {
-            danyFinal = 0;
-        }
-        puntsVida -= danyFinal;
-
-        if (puntsVida < 0) {
-            puntsVida = 0;
-        }
-        return puntsVida == 0;
-    }
-
 }
 
 
