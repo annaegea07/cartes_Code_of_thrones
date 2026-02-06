@@ -4,12 +4,14 @@ public abstract class baseEntitat {
     private String nom;
     private int nivell;
     private int puntsVida;
+    private int dany;
 
     //constructor
-    public baseEntitat(String nom, int nivell, int puntsVida) {
+    public baseEntitat(String nom, int nivell, int puntsVida, int dany) {
         this.nom = nom;
         this.nivell = nivell;
         this.puntsVida = puntsVida;
+        this.dany = dany;
     }
 
     public String getNom() {
@@ -31,17 +33,32 @@ public abstract class baseEntitat {
     public int getPuntsVida() {
         return puntsVida;
     }
+   
+    public int getDany() { 
+        return dany; 
+    }
 
     public void setPuntsVida(int v) {
         if (v < 0) v = 0; //Si algú intenta posar la vida a un valor negatiu, el setter ho corregeix automàticament i ho converteix en 0
         this.puntsVida = v;
     }
-    
-    public abstract void atacar();
+
+    public abstract void atacar(baseEntitat enemigo);
 
     public void rebreDany(int quantitat) {
-        int danyFinal = Math.max(0, quantitat); 
+        int danyFinal = Math.max(0, quantitat);
         setPuntsVida(getPuntsVida()- danyFinal);
+
+
+
+    }
+
+    public void muestrate(){
+        System.out.println("--------------------------------");
+        System.out.println(nom);
+        System.out.println(puntsVida);
+        System.out.println("--------------------------------");
+
     }
 }
 
